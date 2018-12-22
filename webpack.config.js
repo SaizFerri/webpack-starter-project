@@ -53,12 +53,16 @@ const config = {
       filename: 'app.css'
     }),
     new HtmlWebpackPlugin({
-      template: 'index.html'
+      template: 'index.html',
+      // Change to your favicon location
+      favicon: 'assets/img/favicon.png'
     })
   ],
   devServer: {
     stats: 'errors-only',
     open: true,
+    // You may need the option below. DON'T USE IN A PUBLIC SERVER
+    //disableHostCheck: true,
     port: 5555,
     compress: true
   },
