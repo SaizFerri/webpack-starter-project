@@ -27,16 +27,26 @@ const config = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'resolve-url-loader']
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test    : /\.(woff(2)?|eot|ttf|otf)$/,
+        loader  : 'url-loader',
+        options : {
+          name: '[name].[ext]',
+          outputPath: 'assets/fonts/',
+          limit: 10000
+        }
+      },
+      {
+        test: /\.(png|svg|jpe?g|gif)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'assets/img/'
+              outputPath: 'assets/img/',
+              limit: 10000
             }
           }
         ]
@@ -55,14 +65,14 @@ const config = {
     new HtmlWebpackPlugin({
       template: 'index.html',
       // Change to your favicon location
-      favicon: 'assets/img/favicon.png'
+      favicon: ''
     })
   ],
   devServer: {
     stats: 'errors-only',
-    open: true,
+    //open: true,
     // You may need the option below. DON'T USE IN A PUBLIC SERVER
-    //disableHostCheck: true,
+    disableHostCheck: true,
     port: 5555,
     compress: true
   },
